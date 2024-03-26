@@ -1,35 +1,18 @@
-import { NavLink, useNavigate } from "react-router-dom";
-import "./Navbar.css";
+import { NavLink } from "react-router-dom";
 
 export const NavBar = () => {
-  const navigate = useNavigate();
+  //const navigate = useNavigate();
   return (
     <ul className="navbar pb-10">
       <li className="navbar__item pl-10">
         <NavLink
           className="text-left underline text-blue-600 hover:text-purple-700"
-          to={"/allrocks"}
+          to={"/games"}
         >
-          All Rocks
+          Games
         </NavLink>
       </li>
-      <li className="navbar__item">
-        <NavLink
-          className="text-left underline text-blue-600 hover:text-purple-700"
-          to={"/create"}
-        >
-          Collect a Rock
-        </NavLink>
-      </li>
-      <li className="navbar__item">
-        <NavLink
-          className="text-left underline text-blue-600 hover:text-purple-700"
-          to={"/mine"}
-        >
-          My Rocks
-        </NavLink>
-      </li>
-      {localStorage.getItem("gamer_token") !== null ? (
+      {/* {localStorage.getItem("gamer_token") !== null ? (
         <li className="navbar__item">
           <button
             className="underline text-blue-600 hover:text-purple-700"
@@ -60,7 +43,7 @@ export const NavBar = () => {
             </NavLink>
           </li>
         </>
-      )}{" "}
+      )}{" "} */}
     </ul>
   );
 };
