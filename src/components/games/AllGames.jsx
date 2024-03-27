@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export const AllGames = () => {
   const [games, setGames] = useState([]);
+  const navigate = useNavigate();
 
   const fetchGamesFromAPI = async () => {
     let url = "http://localhost:8000/games";
@@ -23,12 +24,21 @@ export const AllGames = () => {
   }, []);
 
   return (
-    <div>
-      <h1>All Games</h1>
+    <div className="max-w-5xl mx-auto px-4">
+      <h1 className="text-center">All Games</h1>
+      <button
+        onClick={() => {
+          navigate("/newGame");
+        }}
+      >
+        Register New Game
+      </button>
       {games.map((g) => {
         return (
           <Link key={g.id} to={`/games/${g.id}`}>
-            <h3>{g.title}</h3>
+            <div className="border border-red-800 rounded p-5 mt-4 hover:bg-gray-300">
+              <h3>{g.title}</h3>
+            </div>
           </Link>
         );
       })}
