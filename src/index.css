@@ -2,20 +2,29 @@
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 
+@import url("https://fonts.googleapis.com/css2?family=Anta&display=swap");
+
 @layer base {
   body {
-    font-family: "Arial", sans-serif;
+    font-family: "Anta", sans-serif;
     background-color: #f0f0f0;
     font-size: 1.5rem;
   }
 
   h1 {
     font-size: 2.5rem;
-    font-weight: bold;
   }
 
   h2 {
     font-size: 2rem;
+  }
+
+  p {
+    font-family: "Arial", sans-serif;
+  }
+
+  span {
+    font-family: "Anta", sans-serif;
   }
 
   button {

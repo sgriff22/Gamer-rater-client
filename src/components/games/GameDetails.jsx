@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { useNavigate, useParams } from "react-router-dom";
+import { ReviewList } from "../reviews/ReviewList";
 
 export const GameDetails = () => {
   const { gameId } = useParams();
@@ -41,23 +42,24 @@ export const GameDetails = () => {
         <div className="container mx-auto flex justify-center">
           <div className="grid grid-cols-1 md:grid-cols-2">
             <div className="flex flex-col justify-center">
-              <p className="mb-2">
-                <span className="font-semibold">Designer:</span> {game.designer}
+              <p className="mb-2 text-lg">
+                <span className="text-2xl">Designer: </span>
+                {game.designer}
               </p>
-              <p className="mb-2">
-                <span className="font-semibold">Year Released:</span>{" "}
+              <p className="mb-2 text-lg">
+                <span className="text-2xl">Year Released: </span>
                 {game.year}
               </p>
-              <p className="mb-2">
-                <span className="font-semibold">Number of Players:</span>{" "}
+              <p className="mb-2 text-lg">
+                <span className="text-2xl">Number of Players: </span>
                 {game.number_of_players}
               </p>
-              <p className="mb-2">
-                <span className="font-semibold">Estimated Play Time:</span>{" "}
+              <p className="mb-2 text-lg">
+                <span className="text-2xl">Estimated Play Time: </span>
                 {game.play_time} hours
               </p>
-              <p className="mb-2">
-                <span className="font-semibold">Recommended Age:</span>{" "}
+              <p className="mb-2 text-lg">
+                <span className="text-2xl">Recommended Age: </span>
                 {game.age}
               </p>
             </div>
@@ -70,7 +72,7 @@ export const GameDetails = () => {
                   {game.categories.map((cat) => (
                     <li
                       key={cat.id}
-                      className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2"
+                      className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-red-800 mr-2 mb-2"
                     >
                       {cat.label}
                     </li>
@@ -79,19 +81,20 @@ export const GameDetails = () => {
               ) : (
                 <p className="text-gray-600 ml-20">No categories listed</p>
               )}
-              <div className="mt-auto flex justify-end">
-                <button
-                  className="mb-3"
-                  onClick={() => {
-                    navigate("review");
-                  }}
-                >
-                  Review Game
-                </button>
-              </div>
+            </div>
+            <div>
+              <button
+                className="mt-5"
+                onClick={() => {
+                  navigate("review");
+                }}
+              >
+                Review Game
+              </button>
             </div>
           </div>
         </div>
+        <ReviewList gameId={parseInt(gameId)} />
       </div>
     </div>
   );
