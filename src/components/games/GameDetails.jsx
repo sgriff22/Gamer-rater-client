@@ -1,27 +1,38 @@
-import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
+import { useNavigate, useParams } from "react-router-dom";
 
 export const GameDetails = () => {
-  const [game, setGame] = useState({});
   const { gameId } = useParams();
+  const navigate = useNavigate();
 
-  const fetchSingleGameFromAPI = async (id) => {
-    let url = `http://localhost:8000/games/${id}`;
+  const {
+    isPending,
+    isError,
+    data: game,
+    error,
+  } = useQuery({
+    queryKey: ["game", gameId],
+    queryFn: async () => {
+      const url = `http://localhost:8000/games/${gameId}`;
 
-    const response = await fetch(url, {
-      headers: {
-        Authorization: `Token ${
-          JSON.parse(localStorage.getItem("gamer_token")).token
-        }`,
-      },
-    });
-    const game = await response.json();
-    setGame(game);
-  };
+      const response = await fetch(url, {
+        headers: {
+          Authorization: `Token ${
+            JSON.parse(localStorage.getItem("gamer_token")).token
+          }`,
+        },
+      });
 
-  useEffect(() => {
-    fetchSingleGameFromAPI(gameId);
-  }, [gameId]);
+      if (!response.ok) {
+        throw new Error("Failed to fetch game");
+      }
+
+      return response.json();
+    },
+  });
+
+  if (isPending) return <div>Loading...</div>;
+  if (isError) return <div>Error: {error.message}</div>;
 
   return (
     <div className="max-w-5xl mx-auto px-4 py-8">
@@ -68,6 +79,16 @@ export const GameDetails = () => {
               ) : (
                 <p className="text-gray-600 ml-20">No categories listed</p>
               )}
+              <div className="mt-auto flex justify-end">
+                <button
+                  className="mb-3"
+                  onClick={() => {
+                    navigate("review");
+                  }}
+                >
+                  Review Game
+                </button>
+              </div>
             </div>
           </div>
         </div>
