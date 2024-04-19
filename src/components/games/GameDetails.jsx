@@ -1,10 +1,15 @@
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useNavigate, useParams } from "react-router-dom";
 import { ReviewList } from "../reviews/ReviewList";
+import { getGamesById } from "../services/games";
 
 export const GameDetails = () => {
   const { gameId } = useParams();
   const navigate = useNavigate();
+
+  const queryClient = useQueryClient();
+
+  const user = queryClient.getQueryData(["user"]);
 
   const {
     isPending,
@@ -13,23 +18,7 @@ export const GameDetails = () => {
     error,
   } = useQuery({
     queryKey: ["game", gameId],
-    queryFn: async () => {
-      const url = `http://localhost:8000/games/${gameId}`;
-
-      const response = await fetch(url, {
-        headers: {
-          Authorization: `Token ${
-            JSON.parse(localStorage.getItem("gamer_token")).token
-          }`,
-        },
-      });
-
-      if (!response.ok) {
-        throw new Error("Failed to fetch game");
-      }
-
-      return response.json();
-    },
+    queryFn: () => getGamesById(gameId),
   });
 
   if (isPending) return <div>Loading...</div>;
@@ -38,6 +27,17 @@ export const GameDetails = () => {
   return (
     <div className="max-w-5xl mx-auto px-4 py-8">
       <div className="bg-gray-100 rounded-lg p-10 shadow-md">
+        {game.user_id === user.id ? (
+          <button
+            onClick={() => {
+              navigate("edit");
+            }}
+          >
+            Edit Game
+          </button>
+        ) : (
+          ""
+        )}
         <h1 className="text-center mb-8 text-red-800">{game.title}</h1>
         <div className="container mx-auto flex justify-center">
           <div className="grid grid-cols-1 md:grid-cols-2">
@@ -94,7 +94,7 @@ export const GameDetails = () => {
             </div>
           </div>
         </div>
-        <ReviewList gameId={parseInt(gameId)} />
+        <ReviewList gameId={gameId} />
       </div>
     </div>
   );

@@ -1,28 +1,13 @@
 import { useQuery } from "@tanstack/react-query";
 import { Link, useNavigate } from "react-router-dom";
+import { getGames } from "../services/games";
 
 export const AllGames = () => {
   const navigate = useNavigate();
 
   const { isPending, isError, data, error } = useQuery({
     queryKey: ["games"],
-    queryFn: async () => {
-      const url = "http://localhost:8000/games";
-
-      const response = await fetch(url, {
-        headers: {
-          Authorization: `Token ${
-            JSON.parse(localStorage.getItem("gamer_token")).token
-          }`,
-        },
-      });
-
-      if (!response.ok) {
-        throw new Error("Failed to fetch games");
-      }
-
-      return response.json();
-    }, 
+    queryFn: getGames,
   });
 
   if (isPending) return <div>Loading...</div>;
