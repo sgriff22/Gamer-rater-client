@@ -1,19 +1,25 @@
-import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useEffect, useState } from "react";
 import { getCategories } from "../services/categories";
-import { createGame } from "../services/games";
+import { useNavigate, useParams } from "react-router-dom";
+import { updateGame } from "../services/games";
 
-export const NewGameForm = () => {
+export const EditGameForm = () => {
+  const { gameId } = useParams();
+  const [editGame, setEditGame] = useState({});
   const [allCategories, setAllCategories] = useState([]);
-  const [title, setTitle] = useState("");
-  const [designer, setDesigner] = useState("");
-  const [year, setYear] = useState("");
-  const [players, setPlayers] = useState("");
-  const [playTime, setPlayTime] = useState("");
-  const [age, setAge] = useState("");
   const [selectedCategoryIds, setSelectedCategoryIds] = useState([]);
-
   const navigate = useNavigate();
+
+  const queryClient = useQueryClient();
+
+  const game = queryClient.getQueryData(["game", gameId]);
+
+  useEffect(() => {
+    if (game) {
+      setEditGame(game);
+    }
+  }, [game]);
 
   useEffect(() => {
     getCategories().then((res) => {
@@ -21,36 +27,18 @@ export const NewGameForm = () => {
     });
   }, []);
 
-  const handleSave = async (e) => {
-    e.preventDefault();
-
-    // Check if any of the fields are empty
-    if (
-      !title ||
-      !designer ||
-      !year ||
-      !players ||
-      !playTime ||
-      !age
-    ) {
-      window.alert("Please fill out all fields.");
-      return;
+  useEffect(() => {
+    if (game.categories) {
+      setSelectedCategoryIds(game.categories.map((cat) => cat.id));
     }
+  }, [game]);
 
-    const game = {
-      title: title,
-      designer: designer,
-      year: parseInt(year),
-      number_of_players: parseInt(players),
-      play_time: parseInt(playTime),
-      age: age,
-      categories: selectedCategoryIds,
-    };
-
-    createGame(game).then(() => {
-      // After the POST request, navigate to games view
-      navigate("/games");
-    });
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setEditGame((prevGame) => ({
+      ...prevGame,
+      [name]: value,
+    }));
   };
 
   const handleCategoryChange = (e) => {
@@ -76,20 +64,46 @@ export const NewGameForm = () => {
     }
   };
 
+  useEffect(() => {
+    setEditGame((prevGame) => ({
+      ...prevGame,
+      categories: selectedCategoryIds,
+    }));
+  }, [selectedCategoryIds]);
+
+  const {
+    mutate: saveGame,
+    isPending,
+    isError,
+    error,
+  } = useMutation({
+    mutationFn: () =>
+      updateGame(gameId, editGame).then(() => {
+        navigate(`/games/${gameId}`);
+      }),
+  });
+
+  if (isPending) return <div>Loading...</div>;
+  if (isError) return <div>Error: {error.message}</div>;
+
+  const handleSave = (e) => {
+    e.preventDefault();
+    saveGame();
+  };
+
   return (
     <div className="flex justify-center items-center mt-8">
       <form className="w-full max-w-lg bg-gray-100  shadow-md rounded-lg px-8 pt-6 pb-8 mb-4">
-        <h1 className="text-center text-red-800">New Game</h1>
+        <h1 className="text-center text-red-800">Edit Game</h1>
         <fieldset className="mt-2 text-lg">
           <label htmlFor="title">Title:</label>
           <input
             id="title"
             type="text"
-            value={title}
+            name="title"
+            value={editGame.title || game.title}
             className="form-control"
-            onChange={(e) => {
-              setTitle(e.target.value);
-            }}
+            onChange={handleChange}
           />
         </fieldset>
         <fieldset className="mt-2 text-lg">
@@ -97,10 +111,9 @@ export const NewGameForm = () => {
           <input
             id="designer"
             type="text"
-            onChange={(e) => {
-              setDesigner(e.target.value);
-            }}
-            value={designer}
+            name="designer"
+            onChange={handleChange}
+            value={editGame.designer || game.designer}
             className="form-control"
           />
         </fieldset>
@@ -109,10 +122,9 @@ export const NewGameForm = () => {
           <input
             id="year"
             type="number"
-            onChange={(e) => {
-              setYear(e.target.value);
-            }}
-            value={year}
+            name="year"
+            onChange={handleChange}
+            value={editGame.year || game.year}
             className="form-control"
           />
         </fieldset>
@@ -121,10 +133,9 @@ export const NewGameForm = () => {
           <input
             id="players"
             type="number"
-            onChange={(e) => {
-              setPlayers(e.target.value);
-            }}
-            value={players}
+            name="number_of_players"
+            onChange={handleChange}
+            value={editGame.number_of_players || game.number_of_players}
             className="form-control"
           />
         </fieldset>
@@ -133,10 +144,9 @@ export const NewGameForm = () => {
           <input
             id="PlayTime"
             type="number"
-            onChange={(e) => {
-              setPlayTime(e.target.value);
-            }}
-            value={playTime}
+            name="play_time"
+            onChange={handleChange}
+            value={editGame.play_time || game.play_time}
             className="form-control"
           />
         </fieldset>
@@ -145,19 +155,18 @@ export const NewGameForm = () => {
           <input
             id="age"
             type="text"
-            onChange={(e) => {
-              setAge(e.target.value);
-            }}
-            value={age}
+            name="age"
+            onChange={handleChange}
+            value={editGame.age || game.age}
             className="form-control"
           />
         </fieldset>
-
         <fieldset className="mt-2 text-lg">
           <label htmlFor="category">Category</label>
           <br />
           <select
             id="category"
+            name="categories"
             multiple
             value={selectedCategoryIds}
             size="4"

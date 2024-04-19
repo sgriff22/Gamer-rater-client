@@ -27,14 +27,17 @@
     font-family: "Anta", sans-serif;
   }
 
-  button {
+  button,
+  button[type="button"] {
     font-size: 0.9rem;
     background-color: darkred;
     color: white;
     border-radius: 5px;
     padding: 5px 10px;
   }
-  button:hover {
+
+  button:hover,
+  button[type="button"]:hover {
     font-size: 0.9rem;
     background-color: white;
     color: darkred;

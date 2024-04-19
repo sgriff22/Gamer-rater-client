@@ -7,6 +7,7 @@ import { GameDetails } from "../games/GameDetails.jsx";
 import { NewGameForm } from "../forms/NewGameForm.jsx";
 import { Welcome } from "../welcome/Welcome.jsx";
 import { ReviewForm } from "../forms/ReviewForm.jsx";
+import { EditGameForm } from "../forms/EditGameForm.jsx";
 
 export const ApplicationViews = () => {
   return (
@@ -20,6 +21,7 @@ export const ApplicationViews = () => {
           <Route path=":gameId">
             <Route index element={<GameDetails />} />
             <Route path="review" element={<ReviewForm />} />
+            <Route path="edit" element={<EditGameForm />} />
           </Route>
         </Route>
         <Route path="/newGame" element={<NewGameForm />} />

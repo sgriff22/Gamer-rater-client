@@ -64,6 +64,7 @@ export const ReviewForm = () => {
         <fieldset className="mt-5 flex justify-end">
           <button
             className="mr-3"
+            type="button" 
             onClick={() => {
               navigate(`/games/${gameId}`);
             }}
