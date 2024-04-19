@@ -1,7 +1,7 @@
 import { useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./Login.css";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useQueryClient } from "@tanstack/react-query";
 
 export const Login = () => {
   const [username, setUsername] = useState("tyler@hilliard.com");
@@ -24,35 +24,13 @@ export const Login = () => {
         if (authInfo.token) {
           localStorage.setItem("gamer_token", JSON.stringify(authInfo));
           // Trigger a refetch of the "user" query after successful login
-          queryClient.invalidateQueries("user");
+          queryClient.invalidateQueries(["user"]);
           navigate("/");
         } else {
           existDialog.current.showModal();
         }
       });
   };
-
-  useQuery({
-    queryKey: ["user"],
-    queryFn: async () => {
-      const url = `http://localhost:8000/user-details`;
-      const response = await fetch(url, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Token ${
-            JSON.parse(localStorage.getItem("gamer_token")).token
-          }`,
-        },
-      });
-
-      if (!response.ok) {
-        throw new Error("Failed to save review");
-      }
-      return response.json();
-    },
-  });
-
 
   return (
     <main className="container--login mt-20">

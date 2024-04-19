@@ -1,4 +1,15 @@
+import { useQuery } from "@tanstack/react-query";
+import { getUser } from "../services/user";
+
 export const Welcome = () => {
+  const userInfo = useQuery({
+    queryKey: ["user"],
+    queryFn: getUser,
+  });
+
+  if (userInfo.isLoading) return <div>Loading...</div>;
+  if (userInfo.isError) return <div>Error: {userInfo.error.message}</div>;
+
   return (
     <div className="bg-red-800 h-screen flex items-center justify-center">
       <div className="text-center text-white">

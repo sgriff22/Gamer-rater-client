@@ -27,7 +27,12 @@ export const AllGames = () => {
         return (
           <Link key={g.id} to={`/games/${g.id}`}>
             <div className="border border-red-800 rounded p-5 mt-4 hover:bg-gray-300">
-              <h3>{g.title}</h3>
+              <h3 className="flex items-center justify-between">
+                {g.title}{" "}
+                <span className="bg-red-800 text-white px-2 text-lg rounded-full">
+                  Rating: {g.average_rating}
+                </span>
+              </h3>
             </div>
           </Link>
         );
