@@ -26,7 +26,7 @@ export const AllGames = () => {
       {data.map((g) => {
         return (
           <Link key={g.id} to={`/games/${g.id}`}>
-            <div className="border border-red-800 rounded p-5 mt-4 hover:bg-gray-300">
+            <div className="border-2 border-red-800 rounded-lg p-5 mt-4 hover:gameLink">
               <h3 className="flex items-center justify-between">
                 {g.title}{" "}
                 <span className="bg-red-800 text-white px-2 text-lg rounded-full">

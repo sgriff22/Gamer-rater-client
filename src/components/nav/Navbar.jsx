@@ -20,19 +20,28 @@ export const NavBar = () => {
   };
 
   return (
-    <ul className="navbar pb-5 bg-gray-300 flex items-center">
-      <li className="navbar__item pl-10 pt-5">
+    <ul className="navbar p-3 bg-gray-300 flex items-center">
+      <li className="navbar__item">
+        <NavLink to={"/"}>
+          <img
+            src="public/images/logo/gamer-rater-logo-gray.png"
+            alt="Gamer Rater Logo"
+            className="w-16 ml-5 hover:scale-110 transition-transform duration-500"
+          />
+        </NavLink>
+      </li>
+      <li className="navbar__item pl-7">
         <NavLink
-          className="text-left text-red-800  hover:text-gray-950"
+          className="text-left text-red-800 transition-all duration-500 hover:yellow"
           to={"/games"}
         >
           Games
         </NavLink>
       </li>
 
-      <li className="navbar__item ml-auto pt-5">
+      <li className="navbar__item ml-auto">
         <button
-          className="text-right text-2xl mr-10 bg-transparent text-red-800 hover:bg-gray-300 hover:border-transparent hover:text-gray-950 hover:text-2xl px-3 py-1"
+          className="text-right text-2xl mr-5 bg-transparent text-red-800 transition-all duration-500 hover:bg-gray-300 hover:border-transparent hover:yellow hover:text-2xl px-3 py-1"
           onClick={handleLogout}
         >
           Logout

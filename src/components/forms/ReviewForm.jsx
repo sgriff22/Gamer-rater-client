@@ -48,14 +48,16 @@ export const ReviewForm = () => {
   return (
     <div className="flex justify-center items-center mt-8">
       <form className="w-full max-w-lg bg-gray-100  shadow-md rounded-lg px-8 pt-6 pb-8 mb-4">
-        <h1 className="text-center text-red-800">Write a Review</h1>
-        <h2 className="text-center">{game?.title}</h2>
-        <fieldset className="mt-2 text-lg">
-          <label htmlFor="review">Your Review:</label>
+        <h1 className="text-center">Write a Review</h1>
+        <h2 className="text-center text-red-800">{game?.title}</h2>
+        <fieldset className="mt-2 text-lg flex flex-col -ml-1">
+          <label htmlFor="review" className="ml-1">
+            Your Review:
+          </label>
           <textarea
             id="review"
             value={review}
-            className="form-control h-auto"
+            className="textarea ml-1"
             onChange={(e) => {
               setReview(e.target.value);
             }}
@@ -64,7 +66,7 @@ export const ReviewForm = () => {
         <fieldset className="mt-5 flex justify-end">
           <button
             className="mr-3"
-            type="button" 
+            type="button"
             onClick={() => {
               navigate(`/games/${gameId}`);
             }}

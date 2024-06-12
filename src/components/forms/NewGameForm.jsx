@@ -25,14 +25,7 @@ export const NewGameForm = () => {
     e.preventDefault();
 
     // Check if any of the fields are empty
-    if (
-      !title ||
-      !designer ||
-      !year ||
-      !players ||
-      !playTime ||
-      !age
-    ) {
+    if (!title || !designer || !year || !players || !playTime || !age) {
       window.alert("Please fill out all fields.");
       return;
     }
@@ -79,7 +72,7 @@ export const NewGameForm = () => {
   return (
     <div className="flex justify-center items-center mt-8">
       <form className="w-full max-w-lg bg-gray-100  shadow-md rounded-lg px-8 pt-6 pb-8 mb-4">
-        <h1 className="text-center text-red-800">New Game</h1>
+        <h1 className="text-center">New Game</h1>
         <fieldset className="mt-2 text-lg">
           <label htmlFor="title">Title:</label>
           <input
@@ -154,7 +147,10 @@ export const NewGameForm = () => {
         </fieldset>
 
         <fieldset className="mt-2 text-lg">
-          <label htmlFor="category">Category</label>
+          <label htmlFor="category">
+            Categories:{" "}
+            <div className="-mb-6 -mt-1 text-sm">(Select all that apply)</div>
+          </label>
           <br />
           <select
             id="category"
@@ -164,9 +160,6 @@ export const NewGameForm = () => {
             className="px-6 py-2 w-72 border border-gray-200 rounded-md"
             onChange={handleCategoryChange}
           >
-            <option value={0} className="mb-1">
-              - Select a Category -
-            </option>
             {allCategories.map((cat) => (
               <option
                 key={`category-${cat.id}`}

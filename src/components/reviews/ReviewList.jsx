@@ -1,7 +1,10 @@
 import { useQuery } from "@tanstack/react-query";
 import PropTypes from "prop-types";
+import { useNavigate } from "react-router-dom";
 
-export const ReviewList = ({ gameId }) => {
+export const ReviewList = ({ gameId, gameUserId, userId }) => {
+  const navigate = useNavigate();
+
   const {
     isPending,
     isError,
@@ -33,12 +36,26 @@ export const ReviewList = ({ gameId }) => {
 
   ReviewList.propTypes = {
     gameId: PropTypes.string.isRequired,
+    gameUserId: PropTypes.number,
+    userId: PropTypes.number,
   };
 
   return (
-    <div className="max-w-xl mx-auto">
-      <h2 className="text-center text-red-800 underline mb-4">Reviews</h2>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+    <div className="max-w-4xl mt-3">
+      <div className="flex items-center">
+        <h2 className=" text-red-800 mb-1 mr-4">Reviews</h2>
+
+        {gameUserId !== userId && (
+          <button
+            onClick={() => {
+              navigate("review");
+            }}
+          >
+            Review Game
+          </button>
+        )}
+      </div>
+      <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
         {reviews.map((r) => {
           return (
             <div
