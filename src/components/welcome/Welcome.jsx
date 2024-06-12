@@ -11,13 +11,12 @@ export const Welcome = () => {
   if (userInfo.isError) return <div>Error: {userInfo.error.message}</div>;
 
   return (
-    <div className="bg-red-800 h-screen flex items-center justify-center">
-      <div className="text-center text-white">
-        <h1 className="font-bold mb-4">Welcome, to Gamer Rater!</h1>
-        <p className="text-lg mb-6">
-          Get ready to add and rate your favorite video games!
-        </p>
-      </div>
+    <div className="bg-red-800 h-screen flex justify-center items-center -m-4">
+      <img
+        src="public/images/logo/gamer-rater-logo.png"
+        alt="Gamer Rater logo"
+        className="rounded-2xl w-2/5 -mt-20 animation"
+      />
     </div>
   );
 };

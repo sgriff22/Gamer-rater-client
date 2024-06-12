@@ -11,8 +11,13 @@
     font-size: 1.5rem;
   }
 
+  .bg {
+    background-color: #f0f0f0;
+  }
+
   h1 {
     font-size: 2.5rem;
+    color: #f4bd41;
   }
 
   h2 {
@@ -27,6 +32,15 @@
     font-family: "Anta", sans-serif;
   }
 
+  .linkHover {
+    color: white;
+    background-color: #f4bd41;
+  }
+
+  .yellow {
+    color: #f4bd41;
+  }
+
   button,
   button[type="button"] {
     font-size: 0.9rem;
@@ -39,12 +53,78 @@
   button:hover,
   button[type="button"]:hover {
     font-size: 0.9rem;
-    background-color: white;
-    color: darkred;
-    border: 1px darkred solid;
+    background-color: #f4bd41;
+    transition-duration: 500ms;
   }
 
-  a:hover {
-    color: darkred;
+  .gameLink {
+    background-color: #f4bd41;
+    transition-duration: 700ms;
+    border: solid 2px #f4bd41;
+    color: white;
+  }
+
+  .textarea {
+    height: 130px;
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+  }
+
+  input:focus,
+  textarea:focus,
+  select:focus {
+    outline: none;
+    border: solid 2px #f4bd41;
+  }
+
+  option:hover {
+    background-color: #f4bd41;
+    color: white; 
+  }
+
+  option:checked {
+    background-color: #f4bd41;
+    color: white; 
+  }
+
+  input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    height: 20px;
+    width: 10px;
+    background: darkred;
+  }
+
+  input[type="range"]:hover::-webkit-slider-thumb {
+    background: #f4bd41;
+  }
+
+  @keyframes fadeInScale {
+    0% {
+      opacity: 0;
+      transform: scale(0.5);
+      filter: drop-shadow(0 0 0 #fff);
+    }
+    90% {
+      opacity: 1;
+      transform: scale(1.05);
+      filter: drop-shadow(0 0 30px #f4bd41);
+    }
+    95% {
+      transform: scale(1.1);
+      filter: drop-shadow(0 0 50px #f4bd41);
+    }
+    100% {
+      transform: scale(1);
+      filter: drop-shadow(0 0 100px #f4bd41);
+    }
+  }
+
+  .animation {
+    animation: fadeInScale 1.5s ease-out forwards;
   }
 }

@@ -52,30 +52,31 @@ export const RatingSlider = ({ rating, setRating, setUserRating }) => {
   };
 
   return (
-    <div>
-      <div className="flex justify-end items-center">
-        <label htmlFor="rating" className="text-lg mr-4">
+    <div className="ml-5">
+      <div className=" shadow-md border rounded-lg flex flex-col pl-5 pr-3 py-3">
+        <label htmlFor="rating" className="text-lg">
           Rate the game:
         </label>
-      </div>
-      <div className="flex justify-end items-center">
-        <input
-          type="range"
-          id="rating"
-          name="rating"
-          min="0"
-          max="10"
-          step="1"
-          value={rating}
-          className="bg-gray-300 appearance-none h-2 rounded-lg"
-          onChange={(e) => setRating(parseInt(e.target.value))}
-        />
-        <span className="ml-2 text-md">{rating}</span>
-      </div>
-      <div className="flex justify-end mr-12 mb-3">
-        <button className="text-xs hover:text-xs" onClick={onSubmit}>
-          Submit
-        </button>
+
+        <div className="flex justify-start items-center">
+          <input
+            type="range"
+            id="rating"
+            name="rating"
+            min="0"
+            max="10"
+            step="1"
+            value={rating}
+            className="bg-gray-300 appearance-none h-2 w-3/4 rounded-lg focus:border-none"
+            onChange={(e) => setRating(parseInt(e.target.value))}
+          />
+          <span className="ml-2 text-lg">{rating}</span>
+        </div>
+        <div>
+          <button className="text-xs hover:text-xs" onClick={onSubmit}>
+            Submit
+          </button>
+        </div>
       </div>
     </div>
   );
