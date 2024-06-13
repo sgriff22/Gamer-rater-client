@@ -16,13 +16,13 @@ export const NavBar = () => {
     });
 
     // Navigate to the login page
-    navigate("/login");
+    navigate("/");
   };
 
   return (
     <ul className="navbar p-3 bg-gray-300 flex items-center">
       <li className="navbar__item">
-        <NavLink to={"/"}>
+        <NavLink to={"/welcome"}>
           <img
             src="public/images/logo/gamer-rater-logo-gray.png"
             alt="Gamer Rater Logo"

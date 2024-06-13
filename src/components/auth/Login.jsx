@@ -1,6 +1,5 @@
 import { useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import "./Login.css";
 import { useQueryClient } from "@tanstack/react-query";
 
 export const Login = () => {
@@ -25,7 +24,7 @@ export const Login = () => {
           localStorage.setItem("gamer_token", JSON.stringify(authInfo));
           // Trigger a refetch of the "user" query after successful login
           queryClient.invalidateQueries(["user"]);
-          navigate("/");
+          navigate("/welcome");
         } else {
           existDialog.current.showModal();
         }
@@ -33,8 +32,8 @@ export const Login = () => {
   };
 
   return (
-    <main className="container--login mt-20">
-      <dialog className="dialog dialog--auth" ref={existDialog}>
+    <main className="flex justify-center">
+      <dialog className="dialog dialog--auth dialog-style" ref={existDialog}>
         <div>User does not exist</div>
         <button
           className="button--close"
@@ -44,49 +43,58 @@ export const Login = () => {
         </button>
       </dialog>
 
-      <section>
-        <form className="form--login border shadow-md" onSubmit={handleLogin}>
-          <h1 className="text-center mt-7 mb-3 text-red-800">Gamer Rater</h1>
-          <h2 className="text-xl mb-5 text-center">Please sign in</h2>
-          <fieldset className="mb-4">
+      <form
+        className="flex flex-wrap justify-center py-10 rounded-lg mr-20 ml-20"
+        onSubmit={handleLogin}
+      >
+        <img
+          src="public/images/logo/gamer-rater-logo.png"
+          alt="Gamer Rater logo"
+          className="rounded-2xl w-96 mb-2"
+        />
+        <h2 className="mb-5 text-center w-full yellow">Please sign in</h2>
+        <div className="flex flex-col justify-center">
+          <fieldset className="mb-4 flex flex-col">
             <label htmlFor="inputUsername"> Username </label>
             <input
               type="username"
               id="inputUsername"
               value={username}
               onChange={(evt) => setUsername(evt.target.value)}
-              className="form-control"
+              className="rounded-md text-xl px-2 py-1 border shadow-sm"
               placeholder="Username"
               required
               autoFocus
             />
           </fieldset>
-          <fieldset className="mb-4">
-            <label htmlFor="inputPassword"> Password </label>
+          <fieldset className="mb-4 flex flex-col">
+            <label htmlFor="inputPassword" className="w-3/4">
+              {" "}
+              Password{" "}
+            </label>
             <input
               type="password"
               id="inputPassword"
               value={password}
               onChange={(evt) => setPassword(evt.target.value)}
-              className="form-control"
+              className="rounded-md text-xl px-2 py-1 border shadow-sm"
               placeholder="Password"
             />
           </fieldset>
-          <fieldset>
+          <fieldset className="w-4/5 mb-4">
             <button>Sign in</button>
           </fieldset>
-          <div className="loginLinks">
-            <section className="link--register">
-              <Link
-                className="text-lg underline over:text-red-800"
-                to="/register"
-              >
-                Not a member yet?
-              </Link>
-            </section>
-          </div>
-        </form>
-      </section>
+
+          <section>
+            <Link
+              className="text-lg underline hover:text-red-800"
+              to="/register"
+            >
+              Not a member yet?
+            </Link>
+          </section>
+        </div>
+      </form>
     </main>
   );
 };

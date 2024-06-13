@@ -12,10 +12,10 @@ import { EditGameForm } from "../forms/EditGameForm.jsx";
 export const ApplicationViews = () => {
   return (
     <Routes>
-      <Route path="/login" element={<Login />} />
+      <Route path="/" element={<Login />} />
       <Route path="/register" element={<Register />} />
       <Route element={<Authorized />}>
-        <Route path="/" element={<Welcome />} />
+        <Route path="/welcome" element={<Welcome />} />
         <Route path="/games">
           <Route index element={<AllGames />} />
           <Route path=":gameId">

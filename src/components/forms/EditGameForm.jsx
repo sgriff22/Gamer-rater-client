@@ -92,21 +92,21 @@ export const EditGameForm = () => {
   };
 
   return (
-    <div className="flex justify-center items-center mt-8">
-      <form className="w-full max-w-lg bg-gray-100  shadow-md rounded-lg px-8 pt-6 pb-8 mb-4">
+    <div className="flex justify-center items-center mt-8 mb-5">
+      <form className="w-full max-w-lg bg-gray-100 shadow-md rounded-lg pb-12 pt-10 px-20 mb-4">
         <h1 className="text-center">Edit Game</h1>
-        <fieldset className="mt-2 text-lg">
+        <fieldset className="mt-2 text-lg flex flex-col">
           <label htmlFor="title">Title:</label>
           <input
             id="title"
             type="text"
             name="title"
             value={editGame.title || game.title}
-            className="form-control"
+            className="rounded-md text-gray-400 px-2 py-1 border shadow-sm"
             onChange={handleChange}
           />
         </fieldset>
-        <fieldset className="mt-2 text-lg">
+        <fieldset className="mt-2 text-lg flex flex-col">
           <label htmlFor="designer">Designer:</label>
           <input
             id="designer"
@@ -114,32 +114,34 @@ export const EditGameForm = () => {
             name="designer"
             onChange={handleChange}
             value={editGame.designer || game.designer}
-            className="form-control"
+            className="rounded-md text-gray-400 px-2 py-1 border shadow-sm"
           />
         </fieldset>
-        <fieldset className="mt-2 text-lg">
-          <label htmlFor="year">Year:</label>
-          <input
-            id="year"
-            type="number"
-            name="year"
-            onChange={handleChange}
-            value={editGame.year || game.year}
-            className="form-control"
-          />
-        </fieldset>
-        <fieldset className="mt-2 text-lg">
-          <label htmlFor="players">Number of players:</label>
-          <input
-            id="players"
-            type="number"
-            name="number_of_players"
-            onChange={handleChange}
-            value={editGame.number_of_players || game.number_of_players}
-            className="form-control"
-          />
-        </fieldset>
-        <fieldset className="mt-2 text-lg">
+        <div className="flex gap-5">
+          <fieldset className="mt-2 text-lg flex flex-col w-1/2">
+            <label htmlFor="year">Year:</label>
+            <input
+              id="year"
+              type="number"
+              name="year"
+              onChange={handleChange}
+              value={editGame.year || game.year}
+              className="rounded-md text-gray-400 px-2 py-1 border shadow-sm w-full"
+            />
+          </fieldset>
+          <fieldset className="mt-2 text-lg flex flex-col w-1/2">
+            <label htmlFor="players">Number of players:</label>
+            <input
+              id="players"
+              type="number"
+              name="number_of_players"
+              onChange={handleChange}
+              value={editGame.number_of_players || game.number_of_players}
+              className="rounded-md text-gray-400 px-2 py-1 border shadow-sm w-full"
+            />
+          </fieldset>
+        </div>
+        <fieldset className="mt-2 text-lg flex flex-col">
           <label htmlFor="PlayTime"> Estimated play time (hours):</label>
           <input
             id="PlayTime"
@@ -147,10 +149,10 @@ export const EditGameForm = () => {
             name="play_time"
             onChange={handleChange}
             value={editGame.play_time || game.play_time}
-            className="form-control"
+            className="rounded-md text-gray-400 px-2 py-1 border shadow-sm"
           />
         </fieldset>
-        <fieldset className="mt-2 text-lg">
+        <fieldset className="mt-2 text-lg flex flex-col">
           <label htmlFor="age">Recommended age:</label>
           <input
             id="age"
@@ -158,11 +160,11 @@ export const EditGameForm = () => {
             name="age"
             onChange={handleChange}
             value={editGame.age || game.age}
-            className="form-control"
+            className="rounded-md text-gray-400 px-2 py-1 border shadow-sm"
           />
         </fieldset>
         <fieldset className="mt-2 text-lg">
-        <label htmlFor="category">
+          <label htmlFor="category">
             Categories:{" "}
             <div className="-mb-6 -mt-1 text-sm">(Select all that apply)</div>
           </label>
@@ -180,7 +182,7 @@ export const EditGameForm = () => {
               <option
                 key={`category-${cat.id}`}
                 value={cat.id}
-                className="mb-1"
+                className="mb-1 text-gray-400"
               >
                 {cat.label}
               </option>
