@@ -26,11 +26,14 @@ This application requires the API to be cloned and served. Please ensure you set
     ```bash
     git clone <repository-url>
     ```
+    - Replace `<repository-url>` with the actual URL of this repository.
+   
 
 2. **Navigate to the project directory:**
     ```bash
     cd <repository-directory>
     ```
+    - Replace `<project-directory>` with the name of the directory created by cloning this repository.
 
 3. **Install dependencies:**
     ```bash
