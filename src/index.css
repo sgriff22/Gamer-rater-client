@@ -127,4 +127,13 @@
   .animation {
     animation: fadeInScale 1.5s ease-out forwards;
   }
+
+  .dialog-style {
+    width: 270px;
+    padding: 20px;
+    background-color: #ffffff;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
 }
