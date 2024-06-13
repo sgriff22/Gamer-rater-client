@@ -61,7 +61,7 @@ export const GameDetails = () => {
     <div className="max-w-5xl mx-auto py-8">
       <div className="bg-gray-100 rounded-lg px-20 pt-12 pb-20 shadow-md">
         <div className="flex justify-between items-center">
-          <div>
+          <div className="mb-4">
             {game.user_id === user.id && (
               <button
                 onClick={() => {
