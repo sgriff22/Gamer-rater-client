@@ -4,8 +4,8 @@ import "./Login.css";
 import { useQueryClient } from "@tanstack/react-query";
 
 export const Login = () => {
-  const [username, setUsername] = useState("tyler@hilliard.com");
-  const [password, setPassword] = useState("hilliard");
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
   const existDialog = useRef();
   const navigate = useNavigate();
   const queryClient = useQueryClient();

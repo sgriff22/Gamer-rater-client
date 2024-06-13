@@ -3,10 +3,10 @@ import { Link, useNavigate } from "react-router-dom";
 import "./Login.css";
 
 export const Register = () => {
-  const [username, setUsername] = useState("admina@straytor.com");
-  const [password, setPassword] = useState("straytor");
-  const [firstName, setFirstName] = useState("Admina");
-  const [lastName, setLastName] = useState("Straytor");
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
   const existDialog = useRef();
   const navigate = useNavigate();
 
@@ -48,7 +48,10 @@ export const Register = () => {
       </dialog>
 
       <section>
-        <form className="form--login border shadow-md" onSubmit={handleRegister}>
+        <form
+          className="form--login border shadow-md"
+          onSubmit={handleRegister}
+        >
           <h1 className="text-center text-4xl mt-7 mb-3 text-red-800">
             Gamer Rater
           </h1>
@@ -61,7 +64,7 @@ export const Register = () => {
               value={firstName}
               onChange={(evt) => setFirstName(evt.target.value)}
               className="form-control"
-              placeholder=""
+              placeholder="First Name"
               required
               autoFocus
             />
@@ -74,7 +77,7 @@ export const Register = () => {
               value={lastName}
               onChange={(evt) => setLastName(evt.target.value)}
               className="form-control"
-              placeholder=""
+              placeholder="Last Name"
               required
               autoFocus
             />
