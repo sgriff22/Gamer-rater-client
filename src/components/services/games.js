@@ -45,3 +45,24 @@ export function createGame(game) {
     body: JSON.stringify(game),
   });
 }
+
+export function getFilteredGames(searchQuery, orderByQuery) {
+  let queryString = "";
+
+  // Construct the query string based on provided parameters
+  if (searchQuery && orderByQuery) {
+    queryString = `?q=${searchQuery}&orderby=${orderByQuery}`;
+  } else if (searchQuery) {
+    queryString = `?q=${searchQuery}`;
+  } else if (orderByQuery) {
+    queryString = `?orderby=${orderByQuery}`;
+  }
+
+  return fetchWithResponse(`games${queryString}`, {
+    headers: {
+      Authorization: `Token ${
+        JSON.parse(localStorage.getItem("gamer_token")).token
+      }`,
+    },
+  });
+}
