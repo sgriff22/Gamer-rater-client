@@ -133,32 +133,24 @@ export const GameDetails = () => {
           </div>
 
           <div className="ml-4">
-            {game.user_id !== user.id && (
-              <>
-                {userRating === null ? (
-                  <RatingSlider
-                    rating={rating}
-                    setRating={setRating}
-                    setUserRating={setUserRating}
-                  />
-                ) : (
-                  <div className="text-2xl ml-5">
-                    Your rating:{" "}
-                    <span className="text-red-800 bg-gray-200 p-1 rounded-lg">
-                      {userRating}
-                    </span>
-                  </div>
-                )}
-              </>
+            {userRating === null ? (
+              <RatingSlider
+                rating={rating}
+                setRating={setRating}
+                setUserRating={setUserRating}
+              />
+            ) : (
+              <div className="text-2xl ml-5">
+                Your rating:{" "}
+                <span className="text-red-800 bg-gray-200 p-1 rounded-lg">
+                  {userRating}
+                </span>
+              </div>
             )}
           </div>
         </div>
 
-        <ReviewList
-          gameId={gameId}
-          gameUserId={game.user_id}
-          userId={user.id}
-        />
+        <ReviewList gameId={gameId} />
         <div className="flex items-center mt-4">
           <h2 className="text-red-800 mr-4">Action Shots</h2>
           <button
